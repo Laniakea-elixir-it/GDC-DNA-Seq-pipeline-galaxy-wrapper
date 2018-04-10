@@ -52,6 +52,7 @@
         #end if
         #if $optional.alleles
         --alleles alleles.vcf
+        #end if
       #end if
 
       ##TODO advanced options section if the options inputs are different from the default value the option is added to the command
@@ -111,7 +112,6 @@
         #if $advanced.tumor_lod != "6.3"
           --tumor_lod $advanced.tumor_lod
         #end if
-        ##aggiunte ultime
         #if $contamination_fraction_to_filter != "0.0"
           --contamination_fraction_to_filter $contamination_fraction_to_filter
         #end if
