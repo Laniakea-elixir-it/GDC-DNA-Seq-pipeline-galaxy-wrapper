@@ -24,6 +24,12 @@
       #if $optional.dbSNP
       ln -s $dbSNP dbSNP.vcf &&
       #end if
+      #if $optional.cosmic
+      ln -s $optional.cosmic cosmic.vcf &&
+      #end if
+      #if $optional.alleles
+      ln -s $optional.alleles alleles.vcf
+      #end if
 
       ##TODO creation of .dict file of the genome required by mutect2 to run
       java -jar \$CONDA_DEFAULT_ENV/share/picard-2.7.1-2/picard.jar CreateSequenceDictionary R= genome.fa O= genome.dict 2>$log &&
@@ -39,14 +45,13 @@
         --dbsnp dbSNP.vcf
         #end if
         #if $optional.cosmic
-      --cosmic $optional.cosmic
+      --cosmic cosmic.vcf
         #end if
         #if $optional.list
       -L position.bed
         #end if
-        #if $optional.group
-      --group  $optional.group
-        #end if
+        #if $optional.alleles
+        --alleles alleles.vcf
       #end if
 
       ##TODO advanced options section if the options inputs are different from the default value the option is added to the command
@@ -118,7 +123,12 @@
         #end if
         #if $genotyping_mode != "DISCOVERY"
           --genotyping_mode $genotyping_mode
+        #end if
+        #if $optional.group
+      --group  $optional.group
+        #end if
       #end if
+
 
       ##TODO output section --> if the option string == "yes" the optional output is added
         #if str($optional_out1.outFile1) =="yes"
@@ -149,8 +159,8 @@
     <when value="show">
     <param format="vcf" name="dbSNP" type="data" optional="true" label="dbsnp file.vcf" help="vcf file"/>
     <param format="vcf" name="cosmic" type="data" optional="true" label="cosmic file.vcf" help="vcf file"/>
-    <param format="txt" name="list" type="data" optional="true" label="position list" help="txt file"/>
-    <param format= "txt" name="group" type="data"  optional="true" label="one or more classes, groups of annotation to apply to variant call" />
+    <param format="bed" name="list" type="data" optional="true" label="position list" help="bed file"/>
+    <param format="vcf" name="alleles" type="data" optional="true" label="set of alleles use in genotyping" help="txt file"/>
     </when>
   </conditional>
     <conditional name="advanced">
@@ -160,7 +170,6 @@
       </param>
       <when value="hide"/>
       <when value="show">
-        <param format="txt" name="alleles" type="data" optional="true" label="set of alleles use in genotyping" help="txt file"/>
 	      <param name="heterozygosity" type="float" optional="true" value="0.001" label="heterozygosity value to compute prior likelihoods for any locus" />
 	      <param name="heterozygosity_stdev" type="float" optional="true" value="0.01" label="Standard deviation of eterozygosity for SNP and indel calling" />
         <param name="indel_heterozygosity" type="text" value="1.25E-4" optional="true" label="Heterozygosity for indel calling" />
@@ -186,6 +195,7 @@
           <option value="DISCOVERY" selected="true">DISCOVERY</option>
           <option value="GENOTYPE_GIVEN_ALLELES">GENOTYPE_GIVEN_ALLELES</option>
         </param>
+        <param name="group" type="text"  optional="true" label="one or more classes, groups of annotation to apply to variant call" />
       </when>
     </conditional>
     <conditional name="optional_out1">
