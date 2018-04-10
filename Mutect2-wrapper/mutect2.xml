@@ -1,5 +1,5 @@
-<tool id="mutect2" name="MuTect2" version="3.8">
-  <description>MuTect2</description>
+ <tool id="mutect2" name="MuTect2" version="3.8">
+  <description>somatic SNP and indel caller</description>
   <requirements>
     <requirement type="package" version="3.8" >gatk</requirement>
     <requirement type="package" version="2.7.1" >picard</requirement>
@@ -174,15 +174,13 @@
         <param name="sample_ploidy" type="text" optional="true" value="2"  />
         <param name="standard_min_confidence_threshold_for_calling" type="float" optional="true" value="10.0"  />
         <param name="tumor_lod" type="float" optional="true" value="6.3"  />
-        <!-- aggiunte da mettere nel comando -->
         <param name="contamination_fraction_to_filter" type="float" optional="true" value="0.0" label="Fraction of contamination to aggressively remove" />
         <param name="dbsnp_normal_lod" type="float" optional="true" value="5.5" label="LOD threshold for calling normal non-variant at dbsnp sites" />
         <param name="debug_read_name" type="text" optional="true" value="" label="trace this read name through the calling process" />
-        <param name="genotyping_mode" type="select" optional="true" label="Specifies how to determine the alternate alleles to use for genotyping" />
+        <param name="genotyping_mode" type="select" optional="true" label="Specifies how to determine the alternate alleles to use for genotyping" >
           <option value="DISCOVERY" selected="true">DISCOVERY</option>
           <option value="GENOTYPE_GIVEN_ALLELES">GENOTYPE_GIVEN_ALLELES</option>
         </param>
-        <!-- fine -->
       </when>
     </conditional>
     <conditional name="optional_out1">
@@ -235,6 +233,53 @@
     </data>
   </outputs>
   <help>
-mutect2
+    **IMPORTANT** to get the wrapper ready to start the admin user have to download gatk GATK 3.8-0-ge9d806836 from the broadinstitute site https://software.broadinstitute.org/gatk/download/archive and then move it to the folder XXX
+
+    MuTect2 is a somatic SNP and indel caller that combines the DREAM challenge-winning somatic genotyping engine of the original MuTect (Cibulskis et al., 2013) with the assembly-based machinery of HaplotypeCaller.
+    Galaxy wrapper for MuTect2 implements most but not all options available through the command line. Supported options are described below.
+
+       **Optional Inputs**
+
+          + --alleles none Set of alleles to use in genotyping
+          + --cosmic [] VCF file of COSMIC sites
+          + --dbsnp none dbSNP file
+          + --activityProfileOut NA Output the raw activity profile results in IGV format
+          + --graphOutput NA Write debug assembly graph information to this file
+
+       **Optional Parameters**
+
+          + --contamination_fraction_to_filter 0.0 Fraction of contamination to aggressively remove
+          + --dbsnp_normal_lod 5.5 LOD threshold for calling normal non-variant at dbsnp sites
+          + --debug_read_name NA trace this read name through the calling process
+          + --genotyping_mode DISCOVERY Specifies how to determine the alternate alleles to use for genotyping
+          + --group [] One or more classes/groups of annotations to apply to variant calls
+          + --heterozygosity 0.001 Heterozygosity value used to compute prior likelihoods for any locus
+          + --heterozygosity_stdev 0.01 Standard deviation of eterozygosity for SNP and indel calling
+          + --indel_heterozygosity 1.25E-4 Heterozygosity for indel calling
+          + --initial_normal_lod 0.5 Initial LOD threshold for calling normal variant
+          + --initial_tumor_lod 4.0 Initial LOD threshold for calling tumor variant
+          + --max_alt_allele_in_normal_fraction 0.03 Threshold for maximum alternate allele fraction in normal
+          + --max_alt_alleles_in_normal_count 1 Threshold for maximum alternate allele counts in normal
+          + --max_alt_alleles_in_normal_qscore_sum 20 Threshold for maximum alternate allele quality score sum in normal
+          + --maxReadsInRegionPerSample 1000 Maximum reads in an active region
+          + --min_base_quality_score 10 Minimum base quality required to consider a base for calling
+          + --minReadsPerAlignmentStart 5 Minimum number of reads sharing the same alignment start for each genomic location in an active region
+          + --normal_lod 2.2 LOD threshold for calling normal non-germline
+          + --pir_mad_threshold 3.0 threshold for clustered read position artifact MAD
+          + --pir_median_threshold 10.0 threshold for clustered read position artifact median
+          + --power_constant_qscore 30 Phred scale quality score constant to use in power calculations
+          + --sample_ploidy 2 Ploidy per sample. For pooled data, set to (Number of samples in each pool * Sample Ploidy).
+          + --standard_min_confidence_threshold_for_calling 10.0 The minimum phred-scaled confidence threshold at which variants should be called
+          + --tumor_lod 6.3 LOD threshold for calling tumor variant
+
+       **Advanced Outputs**
+
+          + --bamOutput
+          + --activeRegionOut
+
+    more information at https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_cancer_m2_MuTect2.php
     </help>
+    <citations>
+      <citation type="doi">10.1038/nbt.2514</citation>
+    </citations>
 </tool>
