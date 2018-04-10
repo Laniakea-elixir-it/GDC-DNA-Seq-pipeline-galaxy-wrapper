@@ -21,6 +21,10 @@
       #if $optional.list
       ln -s $optional.list position.bed &&
       #end if
+      #if $optional.dbSNP
+      ln -s $dbSNP dbSNP.vcf &&
+      #end if
+
       ##TODO creation of .dict file of the genome required by mutect2 to run
       java -jar \$CONDA_DEFAULT_ENV/share/picard-2.7.1-2/picard.jar CreateSequenceDictionary R= genome.fa O= genome.dict 2>$log &&
 
@@ -32,7 +36,6 @@
       ## TODO advanced inputs section if the optional inputs are present their options are added to the command
       #if str($optional.inputs) =="show"
         #if $optional.dbSNP
-        ln -s $dbSNP dbSNP.vcf &&
         --dbsnp dbSNP.vcf
         #end if
         #if $optional.cosmic
