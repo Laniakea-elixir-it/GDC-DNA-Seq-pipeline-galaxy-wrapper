@@ -18,7 +18,9 @@
       ln -s $input2".bai" normal.bam.bai &&
       ln -s $reference genome.fa &&
       ln -s $reference".fai" genome.fa.fai &&
-
+      #if $optional.list
+      ln -s $optional.list position.bed &&
+      #end if
       ##TODO creation of .dict file of the genome required by mutect2 to run
       java -jar \$CONDA_DEFAULT_ENV/share/picard-2.7.1-2/picard.jar CreateSequenceDictionary R= genome.fa O= genome.dict 2>$log &&
 
@@ -37,7 +39,7 @@
       --cosmic $optional.cosmic
         #end if
         #if $optional.list
-      -L $optional.list
+      -L position.bed
         #end if
         #if $optional.group
       --group  $optional.group
