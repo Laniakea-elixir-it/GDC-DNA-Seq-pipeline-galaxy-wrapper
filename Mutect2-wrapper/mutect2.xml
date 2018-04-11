@@ -129,7 +129,6 @@
         #end if
       #end if
 
-
       ##TODO output section --> if the option string == "yes" the optional output is added
         #if str($optional_out1.outFile1) =="yes"
           --activeRegionOut $activeRegionOut_output
@@ -170,32 +169,32 @@
       </param>
       <when value="hide"/>
       <when value="show">
-	      <param name="heterozygosity" type="float" optional="true" value="0.001" label="heterozygosity value to compute prior likelihoods for any locus" />
-	      <param name="heterozygosity_stdev" type="float" optional="true" value="0.01" label="Standard deviation of eterozygosity for SNP and indel calling" />
-        <param name="indel_heterozygosity" type="text" value="1.25E-4" optional="true" label="Heterozygosity for indel calling" />
-        <param name="initial_normal_lod" type="float" optional="true" value="0.5" label="Initial LOD threshold for calling normal variant" />
-        <param name="initial_tumor_lod" type="float" optional="true" value="4.0" label="Initial LOD threshold for calling tumor variant" />
-        <param name="max_alt_allele_in_normal_fraction" type="float" optional="true" value="0.03"  />
-        <param name="max_alt_alleles_in_normal_count" type="text" optional="true" value="1"  />
-        <param name="max_alt_alleles_in_normal_qscore_sum" type="text" optional="true" value="20"  />
-        <param name="maxReadsInRegionPerSample" type="text" optional="true" value="1000"  />
-        <param name="min_base_quality_score" type="text" size="2" optional="true" value="10"  />
-        <param name="minReadsPerAlignmentStart" type="text" optional="true" value="5"  />
-        <param name="normal_lod" type="float" optional="true" value="2.2"  />
-        <param name="pir_mad_threshold" type="float" optional="true" value="3.0"  />
-        <param name="pir_median_threshold" type="float" optional="true" value="10.0"  />
-        <param name="power_constant_qscore" type="text" optional="true" value="30"  />
-        <param name="sample_ploidy" type="text" optional="true" value="2"  />
-        <param name="standard_min_confidence_threshold_for_calling" type="float" optional="true" value="10.0"  />
-        <param name="tumor_lod" type="float" optional="true" value="6.3"  />
-        <param name="contamination_fraction_to_filter" type="float" optional="true" value="0.0" label="Fraction of contamination to aggressively remove" />
-        <param name="dbsnp_normal_lod" type="float" optional="true" value="5.5" label="LOD threshold for calling normal non-variant at dbsnp sites" />
-        <param name="debug_read_name" type="text" optional="true" value="" label="trace this read name through the calling process" />
-        <param name="genotyping_mode" type="select" optional="true" label="Specifies how to determine the alternate alleles to use for genotyping" >
+        <param name="heterozygosity" type="float" optional="true" value="0.001"  help="Heterozygosity value used to compute prior likelihoods for any locus" />
+	      <param name="heterozygosity_stdev" type="float" optional="true" value="0.01" help="Standard deviation of eterozygosity for SNP and indel calling"/>
+        <param name="indel_heterozygosity" type="text" value="1.25E-4" optional="true"  help="Heterozygosity for indel calling" />
+        <param name="initial_normal_lod" type="float" optional="true" value="0.5" help="Initial LOD threshold for calling normal variant"  />
+        <param name="initial_tumor_lod" type="float" optional="true" value="4.0"  help="Initial LOD threshold for calling tumor variant" />
+        <param name="max_alt_allele_in_normal_fraction" type="float" optional="true" value="0.03"  help="Threshold for maximum alternate allele fraction in normal" />
+        <param name="max_alt_alleles_in_normal_count" type="text" optional="true" value="1" help="Threshold for maximum alternate allele counts in normal"  />
+        <param name="max_alt_alleles_in_normal_qscore_sum" type="text" optional="true" value="20"  help="Threshold for maximum alternate allele quality score sum in normal" />
+        <param name="maxReadsInRegionPerSample" type="text" optional="true" value="1000"  help="Maximum reads in an active region" />
+        <param name="min_base_quality_score" type="text" size="2" optional="true" value="10"  help="Minimum base quality required to consider a base for calling" />
+        <param name="minReadsPerAlignmentStart" type="text" optional="true" value="5"  help="Minimum number of reads sharing the same alignment start for each genomic location in an active region" />
+        <param name="normal_lod" type="float" optional="true" value="2.2"  help="LOD threshold for calling normal non-germline" />
+        <param name="pir_mad_threshold" type="float" optional="true" value="3.0" help="threshold for clustered read position artifact MAD"  />
+        <param name="pir_median_threshold" type="float" optional="true" value="10.0" help="threshold for clustered read position artifact median"  />
+        <param name="power_constant_qscore" type="text" optional="true" value="30" help="Phred scale quality score constant to use in power calculations"  />
+        <param name="sample_ploidy" type="text" optional="true" value="2"  help="ploidy per sample" />
+        <param name="standard_min_confidence_threshold_for_calling" type="float" optional="true" value="10.0"  help="The minimum phred-scaled confidence threshold at which variants should be called" />
+        <param name="tumor_lod" type="float" optional="true" value="6.3"  help="LOD threshold for calling tumor variant" />
+        <param name="contamination_fraction_to_filter" type="float" optional="true" value="0.0"  help="Fraction of contamination to aggressively remove" />
+        <param name="dbsnp_normal_lod" type="float" optional="true" value="5.5" help="LOD threshold for calling normal non-variant at dbsnp sites"  />
+        <param name="debug_read_name" type="text" optional="true" value="" help="trace this read name through the calling process"  />
+        <param name="genotyping_mode" type="select" optional="true" help="Specifies how to determine the alternate alleles to use for genotyping"  >
           <option value="DISCOVERY" selected="true">DISCOVERY</option>
           <option value="GENOTYPE_GIVEN_ALLELES">GENOTYPE_GIVEN_ALLELES</option>
         </param>
-        <param name="group" type="text"  optional="true" label="one or more classes, groups of annotation to apply to variant call" />
+        <param name="group" type="text"  optional="true" help="one or more classes, groups of annotation to apply to variant call" />
       </when>
     </conditional>
     <conditional name="optional_out1">
