@@ -112,20 +112,20 @@
         #if $advanced.tumor_lod != "6.3"
           --tumor_lod $advanced.tumor_lod
         #end if
-        #if $contamination_fraction_to_filter != "0.0"
+        #if $advanced.contamination_fraction_to_filter != "0.0"
           --contamination_fraction_to_filter $contamination_fraction_to_filter
         #end if
-        #if $dbsnp_normal_lod != "5.5"
+        #if $advanced.dbsnp_normal_lod != "5.5"
           --dbsnp_normal_lod $dbsnp_normal_lod
         #end if
-        #if $debug_read_name != ""
+        #if $advanced.debug_read_name != ""
          --debug_read_name $debug_read_name
         #end if
-        #if $genotyping_mode != "DISCOVERY"
+        #if $advanced.genotyping_mode != "DISCOVERY"
           --genotyping_mode $genotyping_mode
         #end if
-        #if $optional.group
-      --group  $optional.group
+        #if $advanced.group
+      --group  $advanced.group
         #end if
       #end if
 
@@ -159,7 +159,7 @@
     <param format="vcf" name="dbSNP" type="data" optional="true" label="dbsnp file.vcf" help="vcf file"/>
     <param format="vcf" name="cosmic" type="data" optional="true" label="cosmic file.vcf" help="vcf file"/>
     <param format="bed" name="list" type="data" optional="true" label="position list" help="bed file"/>
-    <param format="vcf" name="alleles" type="data" optional="true" label="set of alleles use in genotyping" help="txt file"/>
+    <param format="vcf" name="alleles" type="data" optional="true" label="set of alleles use in genotyping" help="vcf file"/>
     </when>
   </conditional>
     <conditional name="advanced">
@@ -301,6 +301,8 @@
 
           + --bamOutput
           + --activeRegionOut
+          + --activityProfileOut
+          + --graphOutput
 
     more information at https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_cancer_m2_MuTect2.php
     </help>
