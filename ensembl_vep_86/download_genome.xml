@@ -1,0 +1,23 @@
+<tool id="download_genome" name="Get Genome" version="1.0.0">
+    <description>
+      Download and Index Genomes and Reference files used by Ensemble VEP
+    </description>
+    <macros>
+	<import>list_cache_download.xml</import>
+    </macros>
+    <requirements>
+        <requirement type="package" version="86">variant-effect-predictor</requirement>
+    </requirements>    
+    <command><![CDATA[cd \$CONDA_DEFAULT_ENV && [[ -d vep_cache ]] || mkdir vep_cache ; cd bin && perl vep_install.pl -a  ac -s $species --NO_HTSLIB --CACHEDIR \$CONDA_DEFAULT_ENV/vep_cache &> $output
+]]>
+   </command>
+   <inputs> 
+     <expand macro="list_cache"/>
+   </inputs>
+   <outputs>
+        <data format="txt" name="output"/>
+   </outputs>
+   <stdio>
+        <exit_code range="1:" level="fatal" description="Failure" />
+   </stdio>
+</tool>
