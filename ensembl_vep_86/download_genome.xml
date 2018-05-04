@@ -1,17 +1,24 @@
 <tool id="download_genome" name="Get Genome" version="1.0.0">
     <description>
-      Download and Index Genomes and Reference files used by Ensemble VEP
+      Download the cache file used by vep v.86
     </description>
     <macros>
 	<import>list_cache_download.xml</import>
     </macros>
     <requirements>
         <requirement type="package" version="86">variant-effect-predictor</requirement>
-    </requirements>    
-    <command><![CDATA[cd \$CONDA_DEFAULT_ENV && [[ -d vep_cache ]] || mkdir vep_cache ; cd bin && perl vep_install.pl -a  ac -s $species --NO_HTSLIB --CACHEDIR \$CONDA_DEFAULT_ENV/vep_cache &> $output
+    </requirements>
+    <command><![CDATA[cd \$CONDA_DEFAULT_ENV && [[ -d vep_cache ]] || mkdir vep_cache ;
+                      cd bin && perl vep_install.pl
+                        -a  ac -s $species
+                        --NO_HTSLIB
+                        --CACHEDIR \$CONDA_DEFAULT_ENV/vep_cache;
+                        ## write the cache file downloaded 
+                        echo "CACHE DOWNLOADED YET">$output;
+                        ls \$CONDA_DEFAULT_ENV/vep_cache/*/ >> $output;
 ]]>
    </command>
-   <inputs> 
+   <inputs>
      <expand macro="list_cache"/>
    </inputs>
    <outputs>
@@ -23,4 +30,9 @@
   <citations>
     <citation type="doi">10.1186/s13059-016-0974-4</citation>
   </citations>
+  <help>
+    **what it does**
+    download the cache file, used by vep v.86.
+    It is a file containing all transcript models, regulatory features and variant data for a species.
+  </help>
 </tool>

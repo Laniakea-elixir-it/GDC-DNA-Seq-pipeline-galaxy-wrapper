@@ -1,33 +1,29 @@
 <tool id="annotate" name="Annotate" version="1.0.0">
     <description>
-        Annotate VCF files using Ensemble VEP determines the effect of your variants (SNPs, insertions, deletions, CNVs or structural variants) on genes, transcripts, and protein sequence, as well as regulatory regions. 
+        Annotate VCF files using VEP v.86
     </description>
     <macros>
-	<import>list_cache.xml</import>
+        <import>list_cache.xml</import>
     </macros>
     <requirements>
         <requirement type="package" version="86">variant-effect-predictor</requirement>
     </requirements>
     <command><![CDATA[
-
         perl \$CONDA_DEFAULT_ENV/bin/variant_effect_predictor.pl
-            --fork \${GALAXY_SLOTS:-4}
-            --offline 
-	    --dir \$CONDA_DEFAULT_ENV/vep_cache  
-	    --force_overwrite
-	    --everything
-	    --species $species
-	    --vcf
-            --input_file $input
-            --output_file $output
-	    --stats_file stat.htm ]]>
+        --fork \${GALAXY_SLOTS:-4}
+        --offline
+        --dir \$CONDA_DEFAULT_ENV/vep_cache
+        --force_overwrite
+        ##--everything commented because need a lot of ram to run with big files
+        --species $species
+        --vcf
+        --input_file $input
+        --output_file $output
+        --stats_file stat.htm ]]>
     </command>
     <inputs>
-	<expand macro="list_cache"/>
-       <!-- <param name="input" type="data" format="vcf" label="Input VCF File" />
-        <param name="species" type="text" label="insert species" />
-        <param name="assembly" type="text" optional="true" label="insert assembly" />-->
-	<param name="input" type="data" format="vcf" label="Input VCF File" />
+	     <expand macro="list_cache"/>
+	     <param name="input" type="data" format="vcf" label="Input VCF File" />
     </inputs>
     <outputs>
         <data format="vcf" name="output" label="${input.name} vep-annotated" />
@@ -36,7 +32,13 @@
     <stdio>
         <exit_code range="1:" level="fatal" description="Failure" />
     </stdio>
-  <citations>
+    <citations>
     <citation type="doi">10.1186/s13059-016-0974-4</citation>
-  </citations>
+    </citations>
+    <help>
+      **IMPORTANT**
+        before running this tool for the first time you have to download the cache file using vep_download_cache
+      **what it does**
+      determines the effect of your variants (SNPs, insertions, deletions, CNVs or structural variants) on genes, transcripts, and protein sequence, as well as regulatory regions.
+    </help>
 </tool>
