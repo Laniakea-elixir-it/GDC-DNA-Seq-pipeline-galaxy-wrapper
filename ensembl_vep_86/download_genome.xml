@@ -20,4 +20,7 @@
    <stdio>
         <exit_code range="1:" level="fatal" description="Failure" />
    </stdio>
+  <citations>
+    <citation type="doi">10.1186/s13059-016-0974-4</citation>
+  </citations>
 </tool>
