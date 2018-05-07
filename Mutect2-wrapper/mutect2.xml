@@ -18,17 +18,17 @@
       ln -s $input2".bai" normal.bam.bai &&
       ln -s $reference genome.fa &&
       ln -s $reference".fai" genome.fa.fai &&
-      #if $optional.list
-      ln -s $optional.list position.bed &&
+      #if $list
+      ln -s $list position.bed &&
       #end if
-      #if $optional.dbSNP
+      #if $dbSNP
       ln -s $dbSNP dbSNP.vcf &&
       #end if
-      #if $optional.cosmic
-      ln -s $optional.cosmic cosmic.vcf &&
+      #if $cosmic
+      ln -s $cosmic cosmic.vcf &&
       #end if
-      #if $optional.alleles
-      ln -s $optional.alleles alleles.vcf
+      #if $alleles
+      ln -s $alleles alleles.vcf
       #end if
 
       ##TODO creation of .dict file of the genome required by mutect2 to run
@@ -40,20 +40,18 @@
       java -jar \$CONDA_DEFAULT_ENV/opt/gatk-3.8/GenomeAnalysisTK.jar -nct \${GALAXY_SLOTS:-4} -T MuTect2 -R genome.fa  -I:tumor tumor.bam  -I:normal normal.bam  -o $output
 
       ## TODO advanced inputs section if the optional inputs are present their options are added to the command
-      #if str($optional.inputs) =="show"
-        #if $optional.dbSNP
+        #if $dbSNP
         --dbsnp dbSNP.vcf
         #end if
-        #if $optional.cosmic
+        #if $cosmic
       --cosmic cosmic.vcf
         #end if
-        #if $optional.list
+        #if $list
       -L position.bed
         #end if
-        #if $optional.alleles
+        #if $alleles
         --alleles alleles.vcf
         #end if
-      #end if
 
       ##TODO advanced options section if the options inputs are different from the default value the option is added to the command
 
@@ -149,19 +147,10 @@
     <param format="bam" name="input1" type="data" label="tumor bam" help="bamfile"/>
     <param format="bam" name="input2" type="data" label="normal bam" help="bamfile"/>
     <param format="fasta" name="reference" type="data" label="reference" help="genome fasta file"/>
-  <conditional name="optional">
-    <param name="inputs" type="select" label="optional_inputs">
-      <option value="hide" selected="true">Hide</option>
-      <option value="show">Show</option>
-    </param>
-    <when value="hide"/>
-    <when value="show">
     <param format="vcf" name="dbSNP" type="data" optional="true" label="dbsnp file.vcf" help="vcf file"/>
     <param format="vcf" name="cosmic" type="data" optional="true" label="cosmic file.vcf" help="vcf file"/>
     <param format="bed" name="list" type="data" optional="true" label="position list" help="bed file"/>
     <param format="vcf" name="alleles" type="data" optional="true" label="set of alleles use in genotyping" help="vcf file"/>
-    </when>
-  </conditional>
     <conditional name="advanced">
       <param name="advanced_parameters" type="select" label="advanced_parameters">
         <option value="hide" selected="true">Hide</option>
@@ -258,7 +247,8 @@
       </test>
   </tests>
   <help>
-    **IMPORTANT** to get the wrapper ready to start the admin user have to download gatk GATK 3.8-0-ge9d806836 from the broadinstitute site https://software.broadinstitute.org/gatk/download/archive and then move it to the _conda folder
+    **IMPORTANT** to get the wrapper ready to start the admin user have to download gatk GATK 3.8-0-ge9d806836 from the broadinstitute site https://software.broadinstitute.org/gatk/download/archive and then move it in the conda_prefix folder
+    the path of the conda_prefix is written in the galaxy.ini(or .yml) file
 
     MuTect2 is a somatic SNP and indel caller that combines the DREAM challenge-winning somatic genotyping engine of the original MuTect (Cibulskis et al., 2013) with the assembly-based machinery of HaplotypeCaller.
     Galaxy wrapper for MuTect2 implements most but not all options available through the command line. Supported options are described below.
