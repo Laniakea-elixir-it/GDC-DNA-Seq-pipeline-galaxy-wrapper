@@ -1,0 +1,23 @@
+<!--wrapper /galaxy-wrapper add-->
+<section id="somatic-variant-calling" name="muse">
+  <tool file="/home/galaxy/galaxy/tools/galaxy-wrapper/MuSE-wrappers/muse_call.xml" />
+</section>
+<section id="somatic-variant-calling" name="muse_sump">
+  <tool file="/home/galaxy/galaxy/tools/galaxy-wrapper/MuSE-wrappers/muse_sump.xml" />
+</section>
+<section id="somatic-variant-calling" name="mutect2">
+  <tool file="/home/galaxy/galaxy/tools/galaxy-wrapper/Mutect2-wrapper/mutect2.xml" />
+</section>
+<section id="somatic-variant-calling" name="somaticsniper">
+  <tool file="/home/galaxy/galaxy/tools/galaxy-wrapper/somatic-sniper-wrapper/somatic_sniper.xml" />
+</section>
+<section id="somatic-annotation" name="VEP">
+  <tool file="/home/galaxy/galaxy/tools/galaxy-wrapper/ensembl_vep_86-wrapper/vep_annotate.xml" />
+</section>
+<section id="somatic-annotation" name="vep_download_cache">
+  <tool file="/home/galaxy/galaxy/tools/galaxy-wrapper/ensembl_vep_86-wrapper/vep_download_cache.xml" />
+</section>
+<section id="somatic-annotation" name="vcf2maf">
+  <tool file="/home/galaxy/galaxy/tools/galaxy-wrapper/vcf2maf-wrapper/vcf2maf.xml" />
+</section>
+
