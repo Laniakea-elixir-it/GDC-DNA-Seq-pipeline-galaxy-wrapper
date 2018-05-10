@@ -14,8 +14,11 @@
         --offline
         --dir \$CONDA_DEFAULT_ENV/vep_cache
         --force_overwrite
-        ##--everything commented because need a lot of ram to run with big files
+	 #if $everything.value
+            --everything
+         #end if
         --species $species
+	--buffer_size $buffer
         --vcf
         --input_file $input
         --output_file $output
@@ -24,6 +27,10 @@
     <inputs>
 	     <expand macro="list_cache"/>
 	     <param name="input" type="data" format="vcf" label="Input VCF File" />
+	     <param name="everything" type="select" optional="true" label="everything option" help="this option need RAM >16">
+                <option value="--everything">everything</option>
+        </param>
+	     <param name="buffer" type="text" value="5000" label="buffer size decrease if vcf2maf can not allocate memory" />
     </inputs>
     <outputs>
         <data format="vcf" name="output" label="${input.name} vep-annotated" />
