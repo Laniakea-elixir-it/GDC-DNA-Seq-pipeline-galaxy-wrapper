@@ -3,7 +3,7 @@
         Annotate VCF files using VEP v.86
     </description>
     <macros>
-        <import>list_cache.xml</import>
+        <import>vep_annotate_macros.xml</import>
     </macros>
     <requirements>
         <requirement type="package" version="86">variant-effect-predictor</requirement>
