@@ -2,7 +2,7 @@
     <description>Converts VCF files into MAF format</description>
     <command>
         ln -s $input_vcf ./input.vcf;
-        perl /export/results/vcf2maf/vcf2maf.pl    
+        perl $__tool_directory__/vcf2maf.pl    
             --input-vcf ./input.vcf
             --output-maf $output_maf
 	    --vep-forks 1
