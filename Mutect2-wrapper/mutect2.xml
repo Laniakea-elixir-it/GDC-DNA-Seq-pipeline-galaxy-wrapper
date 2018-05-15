@@ -36,7 +36,7 @@
 
       ##TODO gatk-register take the GenomeAnalysisTK-3.8-0-ge9d806836.tar.bz2 unzip it
       ##and move the .jar file to \$CONDA_DEFAULT_ENV/opt/gatk-3.8/ then the mutect2 command is runned
-      gatk-register \$CONDA_PREFIX/GenomeAnalysisTK-3.8-0-ge9d806836.tar.bz2 2>$log ;
+      gatk3-register \$CONDA_PREFIX/GenomeAnalysisTK-3.8-0-ge9d806836.tar.bz2 2>$log ;
       java -jar \$CONDA_DEFAULT_ENV/opt/gatk-3.8/GenomeAnalysisTK.jar -nct \${GALAXY_SLOTS:-4} -T MuTect2 -R genome.fa  -I:tumor tumor.bam  -I:normal normal.bam  -o $output
 
       ## TODO advanced inputs section if the optional inputs are present their options are added to the command
@@ -247,8 +247,7 @@
       </test>
   </tests>
   <help>
-    **IMPORTANT** to get the wrapper ready to start the admin user have to download gatk GATK 3.8-0-ge9d806836 from the broadinstitute site https://software.broadinstitute.org/gatk/download/archive and then move it in the conda_prefix folder
-    the path of the conda_prefix is written in the galaxy.ini(or .yml) file
+    **IMPORTANT** to get the wrapper ready to start the admin user have to download gatk GATK 3.8-0-ge9d806836 from the broadinstitute site https://software.broadinstitute.org/gatk/download/archive and then move it in the $CONDA_PREFIX folder
 
     MuTect2 is a somatic SNP and indel caller that combines the DREAM challenge-winning somatic genotyping engine of the original MuTect (Cibulskis et al., 2013) with the assembly-based machinery of HaplotypeCaller.
     Galaxy wrapper for MuTect2 implements most but not all options available through the command line. Supported options are described below.
