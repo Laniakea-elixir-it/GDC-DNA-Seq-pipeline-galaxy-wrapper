@@ -1,0 +1,16 @@
+ <macros>
+  <macro name="vep-annotate-inputs-macro">
+        <param name="input" type="data" format="vcf" label="Input VCF File" />
+        <param name="everything" type="select" optional="true" label="everything option" help="this option need RAM >16">
+          <option value="--everything">everything</option>
+        </param>
+        <param name="buffer" type="text" value="5000" label="buffer size decrease if vcf2maf can not allocate memory" />
+  </macro>
+  <macro name="vcf2maf-inputs-macro">
+        <param name="tumour_id" type="text" value="TUMOR" label="Tumour ID (Name)"/>
+        <param name="normal_id" type="text" value="NORMAL" label="Normal ID (Name)"/>
+        <param name="input_vcf" type="data" format="vcf" label="Input VCF File" />
+        <param name="reference" type="data" format="fasta" label="Input fasta file" />
+        <param name="buffer" type="text" value="5000" label="buffer size decrease if vcf2maf can not allocate memory" />
+  </macro>
+</macros>
