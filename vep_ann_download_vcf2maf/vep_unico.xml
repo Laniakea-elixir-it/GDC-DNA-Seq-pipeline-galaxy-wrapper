@@ -1,6 +1,6 @@
 <tool id="vep-unico" name="vep-unico" version="1.0.0">
     <description>
-        totale
+        wrapper for variant-effect-predictor86 and vcf2maf
     </description>
     <macros>
         <import>vep-unico-macros.xml</import>
@@ -87,10 +87,10 @@
 		<filter>veptools['veptoolsselect'] == 'downloadcache'</filter>
 	</data>
 	<!--vep-annotate-outputs-->
-	<data format="vcf" name="output2" label="vep-annotated">
-		<filter>veptools['veptoolsselect'] == 'annotate'</filter>
+	<data format="vcf" name="output2" label="vep-annotated on ${on_string} ">
+i		<filter>veptools['veptoolsselect'] == 'annotate'</filter>
 	</data>
-        <data format="html" name="stat" from_work_dir="stat.htm" label="stat">
+        <data format="html" name="stat" from_work_dir="stat.htm" label="stat on ${on_string}">
 		<filter>veptools['veptoolsselect'] == 'annotate'</filter>
 	</data>
 	<!--vcf2maf-outputs-->
@@ -105,10 +105,16 @@
     <citation type="doi">10.1186/s13059-016-0974-4</citation>
     </citations>
     <help>
-      **IMPORTANT** before running vep_annotate or vcf2maf tool for the first time you have to download the cache file using vep_download_cache
-      **what it does**
-      **vep_annotate**determines the effect of your variants (SNPs, insertions, deletions, CNVs or structural variants) on genes, transcripts, and protein sequence, as well as regulatory regions.
-     **vep_download_cache**download the cache file, used by vep v.86.It is a file containing all transcript models, regulatory features and variant data for a species.
-     **vcf2maf**convert vcf in MAF format
+**IMPORTANT**
+        before running vep_annotate or vcf2maf tool for the first time you have to download the cache file using vep_download_cache
+
+	 **what it does**
+
+		- **vep_annotate** determines the effect of your variants (SNPs, insertions, deletions, CNVs or structural variants) on genes, transcripts, and protein sequence, as well as regulatory regions.
+
+		- **vep_download_cache** download the cache file, used by vep v.86.It is a file containing all transcript models, regulatory features and variant data for a species.
+
+		- **vcf2maf** convert vcf in MAF format calling vep_annotate.
+
     </help>
 </tool>
