@@ -3,10 +3,10 @@
   <requirements>
         <requirement type="package" version="1.0.rc" >muse</requirement>
   </requirements>
-  <command> <![CDATA[MuSE sump -O prova $selection -I $input1 -D $input2]]></command>
+  <command> <![CDATA[bgzip -c $input2 > dbsnp.vcf.gz && tabix -p vcf -f dbsnp.vcf.gz && MuSE sump -O prova $selection -I $input1 -D dbsnp.vcf.gz]]></command>
   <inputs>
     <param format="txt" name="input1" type="data" label="MuSE call output" help="txt file from MuSE call"/>
-    <param format="bgzip" name="input2" type="data" label="dbSNP vcf file" help="dbSNP vcf file bzip compressed and based on the same reference genome used in MuSE call"/>
+    <param format="bgzip" name="input2" type="data" label="dbSNP vcf file" help="dbSNP vcf file"/>
     <param name="selection" type="select" label="List Selection">
         <option value="-E" selected="true">input generated from whole exome sequencing</option>
         <option value="-G"                >input generated from whole genome sequencing</option>
