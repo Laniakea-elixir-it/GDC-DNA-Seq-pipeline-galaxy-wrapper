@@ -36,7 +36,7 @@
 
       ##TODO gatk-register take the GenomeAnalysisTK-3.8-0-ge9d806836.tar.bz2 unzip it
       ##and move the .jar file to \$CONDA_DEFAULT_ENV/opt/gatk-3.8/ then the mutect2 command is runned
-      gatk3-register \$CONDA_PREFIX/GenomeAnalysisTK-3.8-0-ge9d806836.tar.bz2 2>$log ;
+      gatk3-register \$_CONDA_DIR/../GenomeAnalysisTK-3.8-0-ge9d806836.tar.bz2 2>$log ;
       java -jar \$CONDA_DEFAULT_ENV/opt/gatk-3.8/GenomeAnalysisTK.jar -nct \${GALAXY_SLOTS:-4} -T MuTect2 -R genome.fa  -I:tumor tumor.bam  -I:normal normal.bam  -o $output
 
       ## TODO advanced inputs section if the optional inputs are present their options are added to the command
