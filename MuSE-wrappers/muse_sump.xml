@@ -2,6 +2,7 @@
   <description>Second step of somatic point mutation caller for tumor-normal paired samples in next-generation sequencing data. </description>
   <requirements>
         <requirement type="package" version="1.0.rc" >muse</requirement>
+	<requirement type="package" version="0.2.5" >tabix</requirement>
   </requirements>
   <command> <![CDATA[bgzip -c $input2 > dbsnp.vcf.gz && tabix -p vcf -f dbsnp.vcf.gz && MuSE sump -O prova $selection -I $input1 -D dbsnp.vcf.gz]]></command>
   <inputs>
