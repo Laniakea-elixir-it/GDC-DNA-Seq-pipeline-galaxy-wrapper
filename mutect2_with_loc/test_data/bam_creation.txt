@@ -1,0 +1,3 @@
+ samtools view -b -h -u /export/galaxy/database/files/000/dataset_204.dat chr22:11603560-11603713 -o mutect2_test_normal2.bam
+ samtools view -b -h -u /export/galaxy/database/files/000/dataset_203.dat chr22:11603560-11603713 -o mutect2_test_tumoral2.bam
+
