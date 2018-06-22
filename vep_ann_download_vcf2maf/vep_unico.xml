@@ -88,7 +88,7 @@
 	</data>
 	<!--vep-annotate-outputs-->
 	<data format="vcf" name="output2" label="vep-annotated on ${on_string} ">
-i		<filter>veptools['veptoolsselect'] == 'annotate'</filter>
+		<filter>veptools['veptoolsselect'] == 'annotate'</filter>
 	</data>
         <data format="html" name="stat" from_work_dir="stat.htm" label="stat on ${on_string}">
 		<filter>veptools['veptoolsselect'] == 'annotate'</filter>
