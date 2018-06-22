@@ -28,7 +28,7 @@
 		<option value="gasterosteus_aculeatus --ncbi-build BROADS1">gasterosteus_aculeatus --ncbi-build BROADS1</option>
 		<option value="gorilla_gorilla --ncbi-build gorGor3.1">gorilla_gorilla --ncbi-build gorGor3.1</option>
 		<option value="homo_sapiens --ncbi-build GRCh37">homo_sapiens --ncbi-build GRCh37</option>
-		<option value="homo_sapiens --ncbi-build GRCh38">homo_sapiens --ncbi-build GRCh38</option>
+		<option value="homo_sapiens --ncbi-build GRCh38" selected="true">homo_sapiens --ncbi-build GRCh38</option>
 		<option value="ictidomys_tridecemlineatus --ncbi-build spetri2">ictidomys_tridecemlineatus --ncbi-build spetri2</option>
 		<option value="latimeria_chalumnae --ncbi-build LatCha1">latimeria_chalumnae --ncbi-build LatCha1</option>
 		<option value="lepisosteus_oculatus --ncbi-build LepOcu1">lepisosteus_oculatus --ncbi-build LepOcu1</option>
