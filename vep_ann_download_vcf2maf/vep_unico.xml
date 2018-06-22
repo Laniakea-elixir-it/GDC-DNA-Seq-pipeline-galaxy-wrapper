@@ -64,8 +64,8 @@
     <inputs>
 	<conditional name="veptools">
 	  <param name="veptoolsselect" type="select" label="vep">
-        	<option value="downloadcache" selected="true">download-cache</option>
-        	<option value="annotate">annotate</option>
+        	<option value="downloadcache" selected="true">vep-download-cache</option>
+        	<option value="annotate">vep-annotate</option>
 		<option value="vcf2maf">vcf2maf</option>
       	  </param>
       	   <when value="downloadcache">
