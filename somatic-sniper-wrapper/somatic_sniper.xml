@@ -109,6 +109,13 @@
 	<outputs>
 		<data name="variants" format="vcf" label="SomaticSniper SNVs" />
 	</outputs>
+	<tests>
+                <test>
+                  <param name="normal" file="sniper_test_normal.bam" />
+                  <param name="tumor" file="sniper_test_tumoral.bam" />
+                  <output name="variants" file="sniper_results.vcf" />
+                </test>
+        </tests>
 	<help>
 		http://gmt.genome.wustl.edu/packages/somatic-sniper/
 	</help>
