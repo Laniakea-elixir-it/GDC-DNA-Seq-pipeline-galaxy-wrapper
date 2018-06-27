@@ -26,10 +26,10 @@
   </outputs>
   <tests>
       <test>
-        <param name="input2" file="Muse_test_tumoral.bam"/>
-        <param name="input3" file="Muse_test_tumoral.bam"/>
-        <param name="region" value="chr22"/>
-        <output name="output" file="results.txt"/>
+	<param name="input1" value="test_fasta.fa" ftype="fasta"/>
+        <param name="input2" value="Muse_test_tumoral.bam"/>
+        <param name="input3" value="Muse_test_normal.bam"/>
+        <output name="output" file="results.txt" lines_diff="8"/>
       </test>
   </tests>
   <help>
