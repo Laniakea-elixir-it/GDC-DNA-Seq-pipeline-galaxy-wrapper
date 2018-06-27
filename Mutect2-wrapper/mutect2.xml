@@ -5,6 +5,9 @@
     <requirement type="package" version="2.7.1" >picard</requirement>
     <requirement type="package" version="1.7" >samtools</requirement>
   </requirements>
+  <macros>
+    <import>mutect2_macros_add_loc.xml</import>
+  </macros>
   <command>
     <![CDATA[
       ##creation of .bai the -@ option is used to allocate additional threads
@@ -16,33 +19,50 @@
       ln -s $input2 normal.bam &&
       ln -s $input1".bai" tumor.bam.bai &&
       ln -s $input2".bai" normal.bam.bai &&
+      #if $reference_source == "history"
       ln -s $reference genome.fa &&
-      ln -s $reference".fai" genome.fa.fai &&
+      ln -s $reference".fai" genome.fa.fai
+      #end if
+      #if $list
+      ln -s $list position.bed &&
+      #end if
+      #if $dbSNP
+      ln -s $dbSNP dbSNP.vcf &&
+      #end if
+      #if $cosmic
+      ln -s $cosmic cosmic.vcf &&
+      #end if
+      #if $alleles
+      ln -s $alleles alleles.vcf
+      #end if
 
       ##TODO creation of .dict file of the genome required by mutect2 to run
-      java -jar \$CONDA_DEFAULT_ENV/share/picard-2.7.1-2/picard.jar CreateSequenceDictionary R= genome.fa O= genome.dict 2>$log &&
+      #if $reference_source == "history"
+      java -jar \$CONDA_DEFAULT_ENV/share/picard-2.7.1-2/picard.jar CreateSequenceDictionary R= genome.fa O= genome.dict 2>$log
+      #end if
 
       ##TODO gatk-register take the GenomeAnalysisTK-3.8-0-ge9d806836.tar.bz2 unzip it
       ##and move the .jar file to \$CONDA_DEFAULT_ENV/opt/gatk-3.8/ then the mutect2 command is runned
-      gatk-register /export/GenomeAnalysisTK-3.8-0-ge9d806836.tar.bz2 2>$log ;
-      java -jar \$CONDA_DEFAULT_ENV/opt/gatk-3.8/GenomeAnalysisTK.jar -nct \${GALAXY_SLOTS:-4} -T MuTect2 -R genome.fa  -I:tumor tumor.bam  -I:normal normal.bam  -o $output
-
+      gatk3-register \$_CONDA_DIR/../GenomeAnalysisTK-3.8-0-ge9d806836.tar.bz2 2>$log ;
+      java -jar \$CONDA_DEFAULT_ENV/opt/gatk-3.8/GenomeAnalysisTK.jar -nct \${GALAXY_SLOTS:-4} -T MuTect2 -I:tumor tumor.bam  -I:normal normal.bam  -o $output
+      #if $reference_source == "history"
+      -R genome.fa
+      #else
+      -R $reference_source.ref_file.fields.path
+      #end if
       ## TODO advanced inputs section if the optional inputs are present their options are added to the command
-      #if str($optional.inputs) =="show"
-        #if $optional.dbSNP
-        ln -s $dbSNP dbSNP.vcf &&
+        #if $dbSNP
         --dbsnp dbSNP.vcf
         #end if
-        #if $optional.cosmic
-      --cosmic $optional.cosmic
+        #if $cosmic
+      --cosmic cosmic.vcf
         #end if
-        #if $optional.list
-      -L $optional.list
+        #if $list
+      -L position.bed
         #end if
-        #if $optional.group
-      --group  $optional.group
+        #if $alleles
+        --alleles alleles.vcf
         #end if
-      #end if
 
       ##TODO advanced options section if the options inputs are different from the default value the option is added to the command
 
@@ -101,18 +121,21 @@
         #if $advanced.tumor_lod != "6.3"
           --tumor_lod $advanced.tumor_lod
         #end if
-        ##aggiunte ultime
-        #if $contamination_fraction_to_filter != "0.0"
+        #if $advanced.contamination_fraction_to_filter != "0.0"
           --contamination_fraction_to_filter $contamination_fraction_to_filter
         #end if
-        #if $dbsnp_normal_lod != "5.5"
+        #if $advanced.dbsnp_normal_lod != "5.5"
           --dbsnp_normal_lod $dbsnp_normal_lod
         #end if
-        #if $debug_read_name != ""
+        #if $advanced.debug_read_name != ""
          --debug_read_name $debug_read_name
         #end if
-        #if $genotyping_mode != "DISCOVERY"
+        #if $advanced.genotyping_mode != "DISCOVERY"
           --genotyping_mode $genotyping_mode
+        #end if
+        #if $advanced.group
+      --group  $advanced.group
+        #end if
       #end if
 
       ##TODO output section --> if the option string == "yes" the optional output is added
@@ -132,22 +155,13 @@
       2> $log
                   ]]></command>
   <inputs>
+    <expand macro="reference_loc"/>
     <param format="bam" name="input1" type="data" label="tumor bam" help="bamfile"/>
     <param format="bam" name="input2" type="data" label="normal bam" help="bamfile"/>
-    <param format="fasta" name="reference" type="data" label="reference" help="genome fasta file"/>
-  <conditional name="optional">
-    <param name="inputs" type="select" label="optional_inputs">
-      <option value="hide" selected="true">Hide</option>
-      <option value="show">Show</option>
-    </param>
-    <when value="hide"/>
-    <when value="show">
     <param format="vcf" name="dbSNP" type="data" optional="true" label="dbsnp file.vcf" help="vcf file"/>
     <param format="vcf" name="cosmic" type="data" optional="true" label="cosmic file.vcf" help="vcf file"/>
-    <param format="txt" name="list" type="data" optional="true" label="position list" help="txt file"/>
-    <param format= "txt" name="group" type="data"  optional="true" label="one or more classes, groups of annotation to apply to variant call" />
-    </when>
-  </conditional>
+    <param format="bed" name="list" type="data" optional="true" label="position list" help="bed file"/>
+    <param format="vcf" name="alleles" type="data" optional="true" label="set of alleles use in genotyping" help="vcf file"/>
     <conditional name="advanced">
       <param name="advanced_parameters" type="select" label="advanced_parameters">
         <option value="hide" selected="true">Hide</option>
@@ -155,32 +169,32 @@
       </param>
       <when value="hide"/>
       <when value="show">
-        <param format="txt" name="alleles" type="data" optional="true" label="set of alleles use in genotyping" help="txt file"/>
-	      <param name="heterozygosity" type="float" optional="true" value="0.001" label="heterozygosity value to compute prior likelihoods for any locus" />
-	      <param name="heterozygosity_stdev" type="float" optional="true" value="0.01" label="Standard deviation of eterozygosity for SNP and indel calling" />
-        <param name="indel_heterozygosity" type="text" value="1.25E-4" optional="true" label="Heterozygosity for indel calling" />
-        <param name="initial_normal_lod" type="float" optional="true" value="0.5" label="Initial LOD threshold for calling normal variant" />
-        <param name="initial_tumor_lod" type="float" optional="true" value="4.0" label="Initial LOD threshold for calling tumor variant" />
-        <param name="max_alt_allele_in_normal_fraction" type="float" optional="true" value="0.03"  />
-        <param name="max_alt_alleles_in_normal_count" type="text" optional="true" value="1"  />
-        <param name="max_alt_alleles_in_normal_qscore_sum" type="text" optional="true" value="20"  />
-        <param name="maxReadsInRegionPerSample" type="text" optional="true" value="1000"  />
-        <param name="min_base_quality_score" type="text" size="2" optional="true" value="10"  />
-        <param name="minReadsPerAlignmentStart" type="text" optional="true" value="5"  />
-        <param name="normal_lod" type="float" optional="true" value="2.2"  />
-        <param name="pir_mad_threshold" type="float" optional="true" value="3.0"  />
-        <param name="pir_median_threshold" type="float" optional="true" value="10.0"  />
-        <param name="power_constant_qscore" type="text" optional="true" value="30"  />
-        <param name="sample_ploidy" type="text" optional="true" value="2"  />
-        <param name="standard_min_confidence_threshold_for_calling" type="float" optional="true" value="10.0"  />
-        <param name="tumor_lod" type="float" optional="true" value="6.3"  />
-        <param name="contamination_fraction_to_filter" type="float" optional="true" value="0.0" label="Fraction of contamination to aggressively remove" />
-        <param name="dbsnp_normal_lod" type="float" optional="true" value="5.5" label="LOD threshold for calling normal non-variant at dbsnp sites" />
-        <param name="debug_read_name" type="text" optional="true" value="" label="trace this read name through the calling process" />
-        <param name="genotyping_mode" type="select" optional="true" label="Specifies how to determine the alternate alleles to use for genotyping" >
+        <param name="heterozygosity" type="float" optional="true" value="0.001"  help="Heterozygosity value used to compute prior likelihoods for any locus" />
+	      <param name="heterozygosity_stdev" type="float" optional="true" value="0.01" help="Standard deviation of eterozygosity for SNP and indel calling"/>
+        <param name="indel_heterozygosity" type="text" value="1.25E-4" optional="true"  help="Heterozygosity for indel calling" />
+        <param name="initial_normal_lod" type="float" optional="true" value="0.5" help="Initial LOD threshold for calling normal variant"  />
+        <param name="initial_tumor_lod" type="float" optional="true" value="4.0"  help="Initial LOD threshold for calling tumor variant" />
+        <param name="max_alt_allele_in_normal_fraction" type="float" optional="true" value="0.03"  help="Threshold for maximum alternate allele fraction in normal" />
+        <param name="max_alt_alleles_in_normal_count" type="text" optional="true" value="1" help="Threshold for maximum alternate allele counts in normal"  />
+        <param name="max_alt_alleles_in_normal_qscore_sum" type="text" optional="true" value="20"  help="Threshold for maximum alternate allele quality score sum in normal" />
+        <param name="maxReadsInRegionPerSample" type="text" optional="true" value="1000"  help="Maximum reads in an active region" />
+        <param name="min_base_quality_score" type="text" size="2" optional="true" value="10"  help="Minimum base quality required to consider a base for calling" />
+        <param name="minReadsPerAlignmentStart" type="text" optional="true" value="5"  help="Minimum number of reads sharing the same alignment start for each genomic location in an active region" />
+        <param name="normal_lod" type="float" optional="true" value="2.2"  help="LOD threshold for calling normal non-germline" />
+        <param name="pir_mad_threshold" type="float" optional="true" value="3.0" help="threshold for clustered read position artifact MAD"  />
+        <param name="pir_median_threshold" type="float" optional="true" value="10.0" help="threshold for clustered read position artifact median"  />
+        <param name="power_constant_qscore" type="text" optional="true" value="30" help="Phred scale quality score constant to use in power calculations"  />
+        <param name="sample_ploidy" type="text" optional="true" value="2"  help="ploidy per sample" />
+        <param name="standard_min_confidence_threshold_for_calling" type="float" optional="true" value="10.0"  help="The minimum phred-scaled confidence threshold at which variants should be called" />
+        <param name="tumor_lod" type="float" optional="true" value="6.3"  help="LOD threshold for calling tumor variant" />
+        <param name="contamination_fraction_to_filter" type="float" optional="true" value="0.0"  help="Fraction of contamination to aggressively remove" />
+        <param name="dbsnp_normal_lod" type="float" optional="true" value="5.5" help="LOD threshold for calling normal non-variant at dbsnp sites"  />
+        <param name="debug_read_name" type="text" optional="true" value="" help="trace this read name through the calling process"  />
+        <param name="genotyping_mode" type="select" optional="true" help="Specifies how to determine the alternate alleles to use for genotyping"  >
           <option value="DISCOVERY" selected="true">DISCOVERY</option>
           <option value="GENOTYPE_GIVEN_ALLELES">GENOTYPE_GIVEN_ALLELES</option>
         </param>
+        <param name="group" type="text"  optional="true" help="one or more classes, groups of annotation to apply to variant call" />
       </when>
     </conditional>
     <conditional name="optional_out1">
@@ -232,8 +246,19 @@
       <filter>optional_out4['outFile4'] == 'yes'</filter>
     </data>
   </outputs>
+  <tests>
+      <test>
+	<conditional name="reference_source">
+          <param name="reference_source_selector" value="history"/>
+          <param name="ref_file" value="test_fasta.fa"/>
+          </conditional>
+          <param name="input1" value="mutect2_test_tumoral2.bam" />
+          <param name="input2" value="mutect2_test_normal2.bam" />
+      </test>
+  </tests>
   <help>
-    **IMPORTANT** to get the wrapper ready to start the admin user have to download gatk GATK 3.8-0-ge9d806836 from the broadinstitute site https://software.broadinstitute.org/gatk/download/archive and then move it to the folder XXX
+    **IMPORTANT** to get the wrapper ready to start the admin user have to download gatk GATK 3.8-0-ge9d806836 from the broadinstitute site https://software.broadinstitute.org/gatk/download/archive and then move it in the conda_prefix folder
+    the path of the conda_prefix is written in the galaxy.ini(or .yml) file
 
     MuTect2 is a somatic SNP and indel caller that combines the DREAM challenge-winning somatic genotyping engine of the original MuTect (Cibulskis et al., 2013) with the assembly-based machinery of HaplotypeCaller.
     Galaxy wrapper for MuTect2 implements most but not all options available through the command line. Supported options are described below.
@@ -276,6 +301,8 @@
 
           + --bamOutput
           + --activeRegionOut
+          + --activityProfileOut
+          + --graphOutput
 
     more information at https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_cancer_m2_MuTect2.php
     </help>
