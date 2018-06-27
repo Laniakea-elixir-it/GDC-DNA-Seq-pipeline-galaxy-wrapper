@@ -1,7 +1,7 @@
 ##MuSE_version="v1.0rc Build Date Feb 11 2018 Build Time 12:25:59"
-##MuSE_call="call -O variant_call -f /export/galaxy/database/files/000/dataset_131.dat -r chr22 /export/galaxy/database/files/001/dataset_1149.dat /export/galaxy/database/files/001/dataset_1148.dat"
-##TUMOR="Sample=tumor,File=/export/galaxy/database/files/001/dataset_1149.dat"
-##NORMAL="Sample=normal,File=/export/galaxy/database/files/001/dataset_1148.dat"
+##MuSE_call="call -O variant_call -f /tmp/tmpCO4Prh/files/000/dataset_1.dat /tmp/tmpCO4Prh/files/000/dataset_2.dat /tmp/tmpCO4Prh/files/000/dataset_3.dat"
+##TUMOR="Sample=tumor,File=/tmp/tmpCO4Prh/files/000/dataset_2.dat"
+##NORMAL="Sample=normal,File=/tmp/tmpCO4Prh/files/000/dataset_3.dat"
 ##contig=<ID=chr1,length=248956422>
 ##contig=<ID=chr2,length=242193529>
 ##contig=<ID=chr3,length=198295559>
@@ -2781,7 +2781,7 @@
 ##contig=<ID=HPV-mL55,length=7177>
 ##contig=<ID=HPV-mRTRX7,length=7731>
 ##contig=<ID=HPV-mSD2,length=7300>
-##reference=file:///export/galaxy/database/files/000/dataset_131.dat
+##reference=file:///tmp/tmpCO4Prh/files/000/dataset_1.dat
 chr22	22714332	A	G	107	88	8.77193e-03	9.99164e-01	9.99999e-07	8.33884e-04	9.99999e-07	1.00000e+00	5.13247e-04	0.00000e+00	NA	NA	NA	NA	NA	1.00000e-08	88	1	N	106	1	88	0	G	0/1:114:113,1:30,34:2	0/0:88:88,0:30,0:.
 chr22	22714349	T	G	97	60	1.02041e-02	9.99999e-07	9.99999e-07	5.87420e-04	9.99411e-01	1.00000e+00	3.44313e-04	0.00000e+00	NA	NA	NA	NA	NA	1.00000e-08	60	1	N	96	1	60	0	G	0/1:98:97,1:31,32:2	0/0:60:60,0:31,0:.
 chr22	22714396	G	A	41	15	3.17073e-01	3.28022e-02	9.99999e-07	9.67196e-01	9.99999e-07	1.00000e+00	1.10259e-02	0.00000e+00	NA	NA	NA	NA	NA	1.00000e-08	15	1	N	28	13	15	0	A	0/1:41:28,13:31,30:2	0/0:15:15,0:30,0:.
