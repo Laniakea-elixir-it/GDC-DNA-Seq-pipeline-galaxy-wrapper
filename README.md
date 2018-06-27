@@ -43,4 +43,7 @@ In addition to annotation False Positive Filter is used to label low quality var
 
 multiple vcf file can merged and using vcf2maf a MAF file from multiple vcf can be created.
 
-**All the tools and option used in the command line pipeline can be used throught galaxy wrappers**
+#More informations at 
+https://docs.gdc.cancer.gov/Data/Bioinformatics_Pipelines/DNA_Seq_Variant_Calling_Pipeline/#file-access-and-availability
+
+*All the tools and option used in the command line pipeline can be used throught galaxy wrappers*
