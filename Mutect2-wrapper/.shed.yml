@@ -1,0 +1,10 @@
+categories:
+- Variant Analysis
+description: 'MuTect2:somatic SNP and indel caller'
+homepage_url: https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_cancer_m2_MuTect2.php
+long_description: |
+MuTect2 is a somatic SNP and indel caller that combines the DREAM challenge-winning somatic genotyping engine of the original MuTect (Cibulskis et al., 2013) with the assembly-based machinery of HaplotypeCaller.
+name: MuTect2
+owner: elixir-it
+remote_repository_url: https://github.com/Laniakea-elixir-it/GDC-DNA-Seq-pipeline-galaxy-wrapper/tree/dev/Mutect2-wrapper
+type: unrestricted
