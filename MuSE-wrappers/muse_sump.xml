@@ -18,9 +18,9 @@
   </outputs>
   <tests>
       <test>
-        <param name="input1" file="results.txt"/>
-        <param name="input2" file="All_201707710.vcf.gz"/>
-        <output name="output" file="sump_results.vcf"/>
+	<param name="input1" value="results.txt"/>
+        <param name="input2" value="dbsnp.vcf"/>
+        <output name="output" file="sump_results.vcf" lines_diff="10"/>
       </test>
   </tests>
   <help>
