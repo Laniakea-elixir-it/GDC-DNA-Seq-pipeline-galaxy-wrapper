@@ -248,13 +248,12 @@
   </outputs>
   <tests>
       <test>
-          <param name="input1" file="mutect2_test_tumoral2.bam" />
-          <param name="input2" file="mutect2_test_normal2.bam" />
-          <conditional name="optional">
-            <param name="list" file="position.bed" />
+	<conditional name="reference_source">
+          <param name="reference_source_selector" value="history"/>
+          <param name="ref_file" value="test_fasta.fa"/>
           </conditional>
-          <output name="output" file="result.vcf" />
-          <output name="log" file="log.txt" />
+          <param name="input1" value="mutect2_test_tumoral2.bam" />
+          <param name="input2" value="mutect2_test_normal2.bam" />
       </test>
   </tests>
   <help>
