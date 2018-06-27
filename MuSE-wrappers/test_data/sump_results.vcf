@@ -11,11 +11,11 @@
 ##FORMAT=<ID=BQ,Number=.,Type=Integer,Description="Average base quality for reads supporting alleles">
 ##FORMAT=<ID=SS,Number=1,Type=Integer,Description="Variant status relative to non-adjacent Normal,0=wildtype,1=germline,2=somatic,3=LOH,4=post-transcriptional modification,5=unknown">
 ##INFO=<ID=SOMATIC,Number=0,Type=Flag,Description="Indicates if record is a somatic mutation">
-##TUMOR="Sample=tumor,File=/export/galaxy/database/files/001/dataset_1149.dat"
-##NORMAL="Sample=normal,File=/export/galaxy/database/files/001/dataset_1148.dat"
+##TUMOR="Sample=tumor,File=/export/galaxy/database/files/000/dataset_533.dat"
+##NORMAL="Sample=normal,File=/export/galaxy/database/files/000/dataset_532.dat"
 ##MuSE_version="v1.0rc Build Date Feb 11 2018 Build Time 12:25:59"
-##MuSE_call_1="call -O variant_call -f /export/galaxy/database/files/000/dataset_131.dat -r chr22 /export/galaxy/database/files/001/dataset_1149.dat /export/galaxy/database/files/001/dataset_1148.dat"
-##MuSE_sump="sump -O prova -E -I /export/galaxy/database/files/001/dataset_1150.dat -D /export/galaxy/database/files/000/dataset_288.dat"
+##MuSE_call_1="call -O variant_call -f /export/galaxy/database/files/000/dataset_552.dat /export/galaxy/database/files/000/dataset_533.dat /export/galaxy/database/files/000/dataset_532.dat"
+##MuSE_sump="sump -O prova -E -I /tmp/tmpbAAnUG/files/000/dataset_1.dat -D dbsnp.vcf.gz"
 ##contig=<ID=chr1,length=248956422>
 ##contig=<ID=chr2,length=242193529>
 ##contig=<ID=chr3,length=198295559>
@@ -2795,7 +2795,7 @@
 ##contig=<ID=HPV-mL55,length=7177>
 ##contig=<ID=HPV-mRTRX7,length=7731>
 ##contig=<ID=HPV-mSD2,length=7300>
-##reference=file:///export/galaxy/database/files/000/dataset_131.dat
+##reference=file:///export/galaxy/database/files/000/dataset_552.dat
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	TUMOR	NORMAL
 chr22	22714396	rs36089572	G	A	.	PASS	SOMATIC	GT:DP:AD:BQ:SS	0/1:41:28,13:31,30:2	0/0:15:15,0:30,0:.
-chr22	22714411	rs12628315	T	C	.	Tier5	SOMATIC	GT:DP:AD:BQ:SS	0/1:28:22,6:31,32:2	0/0:9:9,0:30,0:.
+chr22	22714411	.	T	C	.	PASS	SOMATIC	GT:DP:AD:BQ:SS	0/1:28:22,6:31,32:2	0/0:9:9,0:30,0:.
