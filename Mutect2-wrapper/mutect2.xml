@@ -1,13 +1,13 @@
  <tool id="mutect2" name="MuTect2" version="3.8">
   <description>somatic SNP and indel caller</description>
+  <macros>
+    <import>mutect2_macros_add_loc.xml</import>
+  </macros>
   <requirements>
     <requirement type="package" version="3.8" >gatk</requirement>
     <requirement type="package" version="2.7.1" >picard</requirement>
     <requirement type="package" version="1.7" >samtools</requirement>
   </requirements>
-  <macros>
-    <import>mutect2_macros_add_loc.xml</import>
-  </macros>
   <command>
     <![CDATA[
       ##creation of .bai the -@ option is used to allocate additional threads
