@@ -3,7 +3,7 @@ categories:
 description: 'MuSE:Somatic point mutation caller for tumor-normal paired samples'
 homepage_url: http://bioinformatics.mdanderson.org/main/MuSE
 long_description: |
-MuSE, a novel approach to mutation calling based on the F81 Markov substitution model for molecular evolution [1], which models the evolution of the reference allele to the allelic composition of the matched tumor and normal tissue at each genomic locus. To improve overall accuracy, we further adopt a sample-specific error model to identify cutoffs, reflecting the variation in tumor heterogeneity among samples. 
+MuSE, a novel approach to mutation calling based on the F81 Markov substitution model for molecular evolution, which models the evolution of the reference allele to the allelic composition of the matched tumor and normal tissue at each genomic locus. To improve overall accuracy, we further adopt a sample-specific error model to identify cutoffs, reflecting the variation in tumor heterogeneity among samples. 
 name: MuSE
 owner: elixir-it
 remote_repository_url: https://github.com/Laniakea-elixir-it/GDC-DNA-Seq-pipeline-galaxy-wrapper/tree/master/MuSE-wrappers
