@@ -1,0 +1,10 @@
+categories:
+- Variant Analysis
+description: 'vep86_vcf2maf: vep86 determines the effect of your variants vcf2maf same thing but giving the output in MAF format '
+homepage_url: https://www.ensembl.org/info/docs/tools/vep/index.html https://github.com/mskcc/vcf2maf
+long_description: |
+VEP determines the effect of your variants (SNPs, insertions, deletions, CNVs or structural variants) on genes, transcripts, and protein sequence, as well as regulatory regions.vcf2mafuse VEP and give the output in MAF format 
+name: vep86_vcf2maf
+owner: elixir-it
+remote_repository_url: https://github.com/Laniakea-elixir-it/GDC-DNA-Seq-pipeline-galaxy-wrapper/tree/master/vep86_vcf2maf-wrapper
+type: unrestricted
