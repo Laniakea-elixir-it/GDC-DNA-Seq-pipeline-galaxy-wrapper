@@ -15,7 +15,7 @@
                 </param>
             </when>
             <when value="history">
-                <param name="ref_file" type="data" format="fasta" label="Use the following dataset as the reference sequence" help="You can upload a FASTA sequence to the history and use it as reference" />
+                <param name="ref_file_h" type="data" format="fasta" label="Use the following dataset as the reference sequence" help="You can upload a FASTA sequence to the history and use it as reference" />
             </when> 
       </conditional>
   </macro>
