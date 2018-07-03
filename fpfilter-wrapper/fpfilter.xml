@@ -65,6 +65,8 @@
     --max-mapqual-diff      maximum difference of mapping quality between variant and reference reads
     --max-readlen-diff      maximum difference of average supporting read length between variant and reference reads (paralog filter)
     --min-var-dist-3        minimum average distance to effective 3prime end of read (real end or Q2) for variant-supporting reads
+
+this wrapper has been developed from the existing script at https://github.com/ucscCancer/fpfilter-tool/blob/master/fpfilter.xml , only the requirement and part of the command line have been changed in order to make it suitable for CONDA
   </help>
 
   <tests>
