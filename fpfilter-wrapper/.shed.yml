@@ -1,0 +1,9 @@
+categories:
+- Variant Analysis
+description: 'fpfilter'
+homepage_url: https://github.com/genome/fpfilter-tool
+long_description: |
+name: fpfilter
+owner: elixir-it
+remote_repository_url: https://github.com/Laniakea-elixir-it/GDC-DNA-Seq-pipeline-galaxy-wrapper/tree/master/fpfilter-wrapper
+type: unrestricted
