@@ -13,12 +13,13 @@
    	samtools index $input2 && samtools index $input3 && 
         
         MuSE call -O variant_call
-        #if $reference_source == "history"
-        -f $input1
-        #else
+         #if $reference_source.reference_source_selector == "history"
+         -f $reference_source.reference
+        #end if
+        #if $reference_source.reference_source_selector == "cached"
         -f $reference_source.ref_file.fields.path
         #end if
-        
+ 
         $input2 $input3
 
     #if $region
