@@ -1,7 +1,7 @@
 <macros>
   <macro name="reference_loc">
       <conditional name="reference_source">
-            <param name="reference_source_selector" type="select" label="Will you select a reference genome from your history or use a built-in index?" help="Built-ins were indexed using default options. See `Indexes` section of help below">
+            <param name="reference_source_selector" type="select" label="Will you select a reference genome from your history or use a built-in index?">
                 <option value="cached">Use a built-in genome</option>
                 <option value="history">Use a genome from history as reference</option>
             </param>
