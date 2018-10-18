@@ -4,9 +4,24 @@
         <requirement type="package" version="1.0.rc" >muse</requirement>
         <requirement type="package" version="1.7">samtools</requirement>
   </requirements>
+  <macros>
+    <import>muse_macros.xml</import>
+  </macros>
   <command> <![CDATA[
     ##creation of the bam indexes and execution of the MuSE call command with all the advanced options
-    samtools index $input2 && samtools index $input3 && MuSE call -O variant_call -f $input1 $input2 $input3
+  
+   	samtools index $input2 && samtools index $input3 && 
+        
+        MuSE call -O variant_call
+         #if $reference_source.reference_source_selector == "history"
+         -f $reference_source.reference
+        #end if
+        #if $reference_source.reference_source_selector == "cached"
+        -f $reference_source.ref_file.fields.path
+        #end if
+ 
+        $input2 $input3
+
     #if $region
       -r $region
     #end if
@@ -15,7 +30,7 @@
     #end if]]>
   </command>
   <inputs>
-    <param format="fasta" name="input1" type="data" label="reference" help="fasta"/>
+    <expand macro="reference_loc"/>
     <param format="bam" name="input2" type="data" label="tumor bam" help="tumor sample bamfile"/>
     <param format="bam" name="input3" type="data" label="normal bam" help="normal sample bamfile"/>
     <param name="region" type="text" optional="true" label="region" help="(chr:pos-pos)"/>
