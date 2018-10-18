@@ -41,7 +41,7 @@
   </outputs>
   <tests>
       <test>
-	<param name="input1" value="test_fasta.fa" ftype="fasta"/>
+        <param name="input1" value="test_fasta.fa" ftype="fasta"/>
         <param name="input2" value="Muse_test_tumoral.bam"/>
         <param name="input3" value="Muse_test_normal.bam"/>
         <output name="output" file="results.txt" lines_diff="8"/>
