@@ -29,7 +29,7 @@
 	
 	#if str($veptools.veptoolsselect) =="annotate"
 	 perl \$CONDA_DEFAULT_ENV/bin/variant_effect_predictor.pl
-        --fork \${GALAXY_SLOTS:-4}
+        --fork 4
         --offline
         --dir \$CONDA_DEFAULT_ENV/vep_cache
         --force_overwrite
