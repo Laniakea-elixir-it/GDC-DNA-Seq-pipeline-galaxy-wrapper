@@ -10,7 +10,7 @@
   <command> <![CDATA[
     ##creation of the bam indexes and execution of the MuSE call command with all the advanced options
   
-   	samtools index $input2 && samtools index $input3 && 
+   	samtools index $input2 2> log && samtools index $input3 2>log && 
         
         MuSE call -O variant_call
          #if $reference_source.reference_source_selector == "history"
