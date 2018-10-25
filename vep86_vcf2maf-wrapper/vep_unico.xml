@@ -57,7 +57,8 @@
             --vep-path \$CONDA_DEFAULT_ENV/bin/
             --vep-data \$CONDA_DEFAULT_ENV/vep_cache
             --ref-fasta $veptools.reference
-            --species $veptools.species;
+            --species $veptools.species
+	    --filter-vcf 0 ;
 
         #end if
 		 ]]>
