@@ -32,7 +32,5 @@
 #is the value stored in the workflow for that parameter. That is why the
 #hg19 entry above looks odd. New genomes can be better-looking.
 #
-hg38	hg38	GRCh38.d1.vd1.fa	/cvmfs/elixir-italy.galaxy.refdata/GRCh38.d1.vd1/GRCh38.d1.vd1.fa
-hg38	hg38	hg38_GATK_bundle	/cvmfs/elixir-italy.galaxy.refdata/index_GATK_bundle/Homo_sapiens_assembly38/Homo_sapiens_assembly38.fasta
-hg19	hg19	hg19_GATK_bundle	/cvmfs/elixir-italy.galaxy.refdata/index_GATK_bundle/ucsc.hg19/ucsc.hg19.fasta
+#hg19	hg19	hg19_GATK_bundle	/cvmfs/elixir-italy.galaxy.refdata/index_GATK_bundle/ucsc.hg19/ucsc.hg19.fasta
 

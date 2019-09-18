@@ -15,22 +15,22 @@
     <command><![CDATA[
 	#if str($veptools.veptoolsselect) =="downloadcache"
 	
-	cd \$CONDA_DEFAULT_ENV && [[ -d vep_cache ]] || mkdir vep_cache ;
+	cd \$CONDA_PREFIX && [[ -d vep_cache ]] || mkdir vep_cache ;
                       cd bin && perl vep_install.pl
                         -a  ac -s $veptools.species
                         --NO_HTSLIB
-                        --CACHEDIR \$CONDA_DEFAULT_ENV/vep_cache;
+                        --CACHEDIR \$CONDA_PREFIX/vep_cache;
                         ## write the cache file downloaded 
                         echo "CACHE DOWNLOADED YET">$output1;
-                        ls \$CONDA_DEFAULT_ENV/vep_cache/*/ >> $output1;
+                        ls \$CONDA_PREFIX/vep_cache/*/ >> $output1;
 	#end if
 
 	
 	#if str($veptools.veptoolsselect) =="annotate"
-	 perl \$CONDA_DEFAULT_ENV/bin/variant_effect_predictor.pl
+	 perl \$CONDA_PREFIX/bin/variant_effect_predictor.pl
         --fork 4
         --offline
-        --dir \$CONDA_DEFAULT_ENV/vep_cache
+        --dir \$CONDA_PREFIX/vep_cache
         --force_overwrite
            #if $veptools.everything.value
            --everything
@@ -53,8 +53,8 @@
             --tumor-id $veptools.tumour_id
             --normal-id $veptools.normal_id
             --buffer-size $veptools.buffer
-            --vep-path \$CONDA_DEFAULT_ENV/bin/
-            --vep-data \$CONDA_DEFAULT_ENV/vep_cache
+            --vep-path \$CONDA_PREFIX/bin/
+            --vep-data \$CONDA_PREFIX/vep_cache
             --ref-fasta $veptools.reference
             --species $veptools.species
 	    --filter-vcf 0 ;

@@ -38,13 +38,13 @@
 
       ##TODO creation of .dict file of the genome required by mutect2 to run
       #if $reference_source.reference_source_selector == "history"
-      java -jar \$CONDA_DEFAULT_ENV/share/picard-2.7.1-2/picard.jar CreateSequenceDictionary R= genome.fa O= genome.dict 2>$log &&
+      java -jar \$CONDA_PREFIX/share/picard-2.7.1-2/picard.jar CreateSequenceDictionary R= genome.fa O= genome.dict 2>$log &&
       #end if
 
       ##TODO gatk-register take the GenomeAnalysisTK-3.8-0-ge9d806836.tar.bz2 unzip it
-      ##and move the .jar file to \$CONDA_DEFAULT_ENV/opt/gatk-3.8/ then the mutect2 command is runned
+      ##and move the .jar file to \$CONDA_PREFIX/opt/gatk-3.8/ then the mutect2 command is runned
       gatk3-register \$_CONDA_DIR/../GenomeAnalysisTK-3.8-0-ge9d806836.tar.bz2 2>$log ;
-      java -jar \$CONDA_DEFAULT_ENV/opt/gatk-3.8/GenomeAnalysisTK.jar -nct 4  -T MuTect2 -I:tumor tumor.bam  -I:normal normal.bam  -o $output
+      java -jar \$CONDA_PREFIX/opt/gatk-3.8/GenomeAnalysisTK.jar -nct 4  -T MuTect2 -I:tumor tumor.bam  -I:normal normal.bam  -o $output
       #if $reference_source.reference_source_selector == "history"
       -R genome.fa
       #end if
