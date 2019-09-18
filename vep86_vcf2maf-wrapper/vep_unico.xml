@@ -27,9 +27,20 @@
 
 	
 	#if str($veptools.veptoolsselect) =="annotate"
-
-		sh $__tool_directory__/vep_unico.sh \${GALAXY_SLOTS:-4}  $veptools.species $veptools.buffer $veptools.input $output2 $veptools.everything.value
-
+	 perl \$CONDA_DEFAULT_ENV/bin/variant_effect_predictor.pl
+        --fork 4
+        --offline
+        --dir \$CONDA_DEFAULT_ENV/vep_cache
+        --force_overwrite
+           #if $veptools.everything.value
+           --everything
+           #end if
+        --species $veptools.species
+        --buffer_size $veptools.buffer
+        --vcf
+        --input_file $veptools.input
+        --output_file $output2
+        --stats_file stat.htm 
 	#end if
 
 

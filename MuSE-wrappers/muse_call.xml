@@ -10,7 +10,7 @@
   <command> <![CDATA[
     ##creation of the bam indexes and execution of the MuSE call command with all the advanced options
   
-   	samtools index $input2 && samtools index $input3 && 
+   	samtools index $input2 2> log && samtools index $input3 2>log && 
         
         MuSE call -O variant_call
          #if $reference_source.reference_source_selector == "history"
@@ -41,7 +41,7 @@
   </outputs>
   <tests>
       <test>
-	<param name="input1" value="test_fasta.fa" ftype="fasta"/>
+        <param name="input1" value="test_fasta.fa" ftype="fasta"/>
         <param name="input2" value="Muse_test_tumoral.bam"/>
         <param name="input3" value="Muse_test_normal.bam"/>
         <output name="output" file="results.txt" lines_diff="8"/>

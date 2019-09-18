@@ -1,0 +1,7 @@
+<tables>
+    <!-- Locations of indexes in the muse_call mapper format -->
+    <table name="muse_index" comment_char="#">
+        <columns>value, dbkey, name, path</columns>
+        <file path="tool-data/muse_index.loc" />
+    </table>
+</tables>

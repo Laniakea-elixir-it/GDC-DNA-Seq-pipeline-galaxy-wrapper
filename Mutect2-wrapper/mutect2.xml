@@ -1,13 +1,13 @@
  <tool id="mutect2" name="MuTect2" version="3.8">
   <description>somatic SNP and indel caller</description>
+  <macros>
+    <import>mutect2_macros_add_loc.xml</import>
+  </macros>
   <requirements>
     <requirement type="package" version="3.8" >gatk</requirement>
     <requirement type="package" version="2.7.1" >picard</requirement>
     <requirement type="package" version="1.7" >samtools</requirement>
   </requirements>
-  <macros>
-    <import>mutect2_macros_add_loc.xml</import>
-  </macros>
   <command>
     <![CDATA[
       ##creation of .bai the -@ option is used to allocate additional threads
@@ -19,9 +19,9 @@
       ln -s $input2 normal.bam &&
       ln -s $input1".bai" tumor.bam.bai &&
       ln -s $input2".bai" normal.bam.bai &&
-      #if $reference_source == "history"
-      ln -s $reference genome.fa &&
-      ln -s $reference".fai" genome.fa.fai
+      #if $reference_source.reference_source_selector == "history"
+      ln -s $reference_source.ref_file_h genome.fa &&
+      ln -s $reference_source.ref_file_h".fai" genome.fa.fai &&
       #end if
       #if $list
       ln -s $list position.bed &&
@@ -37,17 +37,18 @@
       #end if
 
       ##TODO creation of .dict file of the genome required by mutect2 to run
-      #if $reference_source == "history"
-      java -jar \$CONDA_DEFAULT_ENV/share/picard-2.7.1-2/picard.jar CreateSequenceDictionary R= genome.fa O= genome.dict 2>$log
+      #if $reference_source.reference_source_selector == "history"
+      java -jar \$CONDA_DEFAULT_ENV/share/picard-2.7.1-2/picard.jar CreateSequenceDictionary R= genome.fa O= genome.dict 2>$log &&
       #end if
 
       ##TODO gatk-register take the GenomeAnalysisTK-3.8-0-ge9d806836.tar.bz2 unzip it
       ##and move the .jar file to \$CONDA_DEFAULT_ENV/opt/gatk-3.8/ then the mutect2 command is runned
       gatk3-register \$_CONDA_DIR/../GenomeAnalysisTK-3.8-0-ge9d806836.tar.bz2 2>$log ;
-      java -jar \$CONDA_DEFAULT_ENV/opt/gatk-3.8/GenomeAnalysisTK.jar -nct \${GALAXY_SLOTS:-4} -T MuTect2 -I:tumor tumor.bam  -I:normal normal.bam  -o $output
-      #if $reference_source == "history"
+      java -jar \$CONDA_DEFAULT_ENV/opt/gatk-3.8/GenomeAnalysisTK.jar -nct 4  -T MuTect2 -I:tumor tumor.bam  -I:normal normal.bam  -o $output
+      #if $reference_source.reference_source_selector == "history"
       -R genome.fa
-      #else
+      #end if
+      #if $reference_source.reference_source_selector == "cached"
       -R $reference_source.ref_file.fields.path
       #end if
       ## TODO advanced inputs section if the optional inputs are present their options are added to the command

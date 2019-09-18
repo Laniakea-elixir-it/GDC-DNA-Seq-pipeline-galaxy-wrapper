@@ -118,5 +118,8 @@
         </tests>
 	<help>
 		http://gmt.genome.wustl.edu/packages/somatic-sniper/
+
+this wrapper was developed from https://github.com/morinlab/tools-morinlab/tree/master/tools/somatic_sniper only the requirement and part of the command line have been changed in order to make it suitable for CONDA
+
 	</help>
 </tool>
