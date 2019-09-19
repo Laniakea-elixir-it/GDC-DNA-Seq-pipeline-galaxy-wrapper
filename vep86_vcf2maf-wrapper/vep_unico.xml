@@ -55,9 +55,20 @@
             --buffer-size $veptools.buffer
             --vep-path \$CONDA_PREFIX/bin/
             --vep-data \$CONDA_PREFIX/vep_cache
-            --ref-fasta $veptools.reference
-            --species $veptools.species
-	    --filter-vcf 0 ;
+            
+
+
+
+        
+         #if $veptools.reference_source.reference_source_selector == "history"
+         --ref-fasta  $veptools.reference_source.reference
+        #end if
+        #if $veptools.reference_source.reference_source_selector == "cached"
+        --ref-fasta  $veptools.reference_source.ref_file.fields.path
+        #end if
+    
+             --species $veptools.species
+             --filter-vcf 0 ;
 
         #end if
 		 ]]>
