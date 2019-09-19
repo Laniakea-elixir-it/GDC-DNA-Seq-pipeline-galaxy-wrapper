@@ -83,7 +83,7 @@
 			</param>
 			<when value="cached">
 				<param name="index" type="select" label="Reference Genome File" >
-					<options from_data_table="all_fasta" />
+					<options from_data_table="sniper_index" />
 				</param>
       			</when>
       			<when value="history">

@@ -18,7 +18,7 @@
             </param>
             <when value="cached">
                 <param name="ref_file" type="select" label="Using reference genome" help="Select genome from the list">
-                    <options from_data_table="all_fasta">
+                    <options from_data_table="vcf_to_maf_index">
                         <filter type="sort_by" column="2" />
                         <validator type="no_options" message="No indexes are available" />
                     </options>

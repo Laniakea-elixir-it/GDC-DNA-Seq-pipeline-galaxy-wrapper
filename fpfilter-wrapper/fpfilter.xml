@@ -10,7 +10,15 @@
 	--bam-file ${bam}
 	--bam-index  ${bam.metadata.bam_index}
 	--sample ${sample}
-	--reference ${reference}
+
+
+         #if $reference_source.reference_source_selector == "history"
+         --reference $reference_source.reference
+        #end if
+        #if $reference_source.reference_source_selector == "cached"
+         --reference  $reference_source.ref_file.fields.path
+        #end if
+
 	--output ${output}
 	--min-read-pos ${min_read_pos}
 	--min-var-freq ${min_var_freq}
@@ -27,8 +35,24 @@
     <param name="vcf" format="vcf" type="data" label="VCF File" help="The input VCF file. Must have a GT field." />
     <param name="bam" format="bam" type="data" label="bam file" help="The BAM file of the sample you are filtering on. Typically the tumor." />
     <param name="sample" type="text" label="Sample" value="sample" help="The sample name of the sample you want to filter on in the VCF file." />
-    <param name="reference" format="fasta" type="data" label="Reference Genome" help="A fasta containing the reference sequence the BAM file was aligned to"/>
-
+      <conditional name="reference_source">
+            <param name="reference_source_selector" type="select" label="Will you select a reference genome from your history or use a built-in index?">
+                <option value="cached">Use a built-in genome</option>
+                <option value="history">Use a genome from history as reference</option>
+            </param>
+            <when value="cached">
+                <param name="ref_file" type="select" label="Using reference genome" help="Select genome from the list">
+                    <options from_data_table="fpf_index">
+                        <filter type="sort_by" column="2" />
+                        <validator type="no_options" message="No indexes are available" />
+                    </options>
+                    <validator type="no_options" message="A built-in reference genome is not available for the build associated with the selected input file"/>
+                </param>
+            </when>
+            <when value="history">
+                <param name="reference" type="data" format="fasta" label="Use the following dataset as the reference sequence" help="You can upload a FASTA sequence to the history and use it as reference" />
+            </when> 
+      </conditional>
     <param name="min_read_pos" type="float" value="0.10" label="Min Read Pos" help="Minimum average relative distance from start/end of read." />
     <param name="min_var_freq" type="float" value="0.05" label="Min Var Freq" help="Minimum variant allele frequency." />
     <param name="min_var_count" type="integer" value="4" label="Min Var Count" help="Minimum number of variant-supporting reads." />

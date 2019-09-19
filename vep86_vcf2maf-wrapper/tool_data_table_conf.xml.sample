@@ -1,0 +1,7 @@
+<tables>
+    <!-- Locations of indexes in the vep86_vcf2maf-wrapper mapper format -->
+    <table name="vcf_to_maf_index" comment_char="#">
+        <columns>value, dbkey, name, path</columns>
+        <file path="tool-data/vcf_to_maf_index.loc" />
+    </table>
+</tables>
