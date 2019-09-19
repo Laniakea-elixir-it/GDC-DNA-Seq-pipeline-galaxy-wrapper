@@ -3,6 +3,7 @@
   <requirements>
         <requirement type="package" version="1.0.rc" >muse</requirement>
         <requirement type="package" version="1.7">samtools</requirement>
+        <requirement type="package" version="1.0" >openssl</requirement>
   </requirements>
   <macros>
     <import>muse_macros.xml</import>
