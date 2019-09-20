@@ -1,5 +1,5 @@
 <tables>
-    <!-- Locations of all fasta files under genome directory  -->
+    <!-- Locations of  sniper index under genome directory  -->
     <table name="sniper_index" comment_char="#" allow_duplicate_entries="False">
         <columns>value, dbkey, name, path</columns>
         <file path="tool-data/sniper_index.loc" />
