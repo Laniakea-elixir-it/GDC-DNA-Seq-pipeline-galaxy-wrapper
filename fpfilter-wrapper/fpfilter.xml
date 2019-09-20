@@ -3,6 +3,7 @@
   <requirements>
     <requirement type="package" version="0.8" >bam-readcount</requirement>
     <requirement type="package" >samtools</requirement>
+    <requirement type="package" version="1.0" >openssl</requirement>
   </requirements>
   <command>
 	perl  $__tool_directory__/fpfilter.pl
