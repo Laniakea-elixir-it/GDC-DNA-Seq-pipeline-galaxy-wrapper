@@ -43,7 +43,7 @@
 
       ##TODO gatk mv_untar_gatk take the GenomeAnalysisTK-3.8-0-ge9d806836.tar.bz2 unzip it
       ##and move  .jar and  command is runned
-      sh $__tool_directory__/mv_untar_gatk.sh &&
+      bash $__tool_directory__/mv_untar_gatk.sh &> $log &&
 
       java -jar \$CONDA_PREFIX/../../GenomeAnalysisTK.jar -nct 4  -T MuTect2 -I:tumor tumor.bam  -I:normal normal.bam  -o $output
       #if $reference_source.reference_source_selector == "history"
