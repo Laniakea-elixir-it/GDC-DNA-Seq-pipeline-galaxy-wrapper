@@ -132,4 +132,4 @@ GDC somatic variant Galaxy workflow
    :scale: 50%
    :align: center
 
-.. centered:: The Galaxy workflow that connects together all the tool of the GDC-DNA-seq pipeline in order to be automatically performed in a single step.
+   Fig.1-The Galaxy workflow that connects together all the tool of the GDC-DNA-seq pipeline in order to be automatically performed in a single step.
