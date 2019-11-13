@@ -1,8 +1,8 @@
 #This is a sample file distributed with Galaxy that enables tools
-#to use a directory of MuTect2 indexed sequences data files. You will need
-#to create these data files and then create a mutect2_indexes.loc file
+#to use a directory of vep86_vcf2maf-wrapper indexed sequences data files. You will need
+#to create these data files and then create a vcf_to_maf_index.loc file
 #similar to this one (store it in this directory) that points to
-#the directories in which those files are stored. The mutect2_indexes.loc
+#the directories in which those files are stored. The vcf_to_maf_index.loc
 #file has this format (longer white space characters are TAB characters):
 #
 #<unique_build_id>   <dbkey>   <display_name>   <file_path>
@@ -17,7 +17,7 @@
 #would contain phiX.dict, phiX.fa.fai files.
 #
 #
-#Your mutect2_indexes.loc file should include an entry per line for each
+#Your vcf_to_maf_index.loc file should include an entry per line for each
 #index set you have stored. The "file" in the path does not actually
 #exist, but it is the prefix for the actual index files.  For example:
 #

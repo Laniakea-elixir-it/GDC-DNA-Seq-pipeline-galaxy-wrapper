@@ -1,0 +1,7 @@
+<tables>
+    <!-- Locations of indexes in the fpfilter mapper format -->
+    <table name="fpf_index" comment_char="#">
+        <columns>value, dbkey, name, path</columns>
+        <file path="tool-data/fpf_index.loc" />
+    </table>
+</tables>
