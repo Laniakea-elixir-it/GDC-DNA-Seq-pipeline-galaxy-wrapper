@@ -133,3 +133,16 @@ GDC somatic variant Galaxy workflow
    :align: center
 
    Fig.1-The Galaxy workflow that connects together all the tool of the GDC-DNA-seq pipeline in order to be automatically performed in a single step.
+   
+.. warning::
+
+   The GDC Somatic Variant Galaxy pipeline requires at least 7.5 GB of RAM to properly run, due to the large amount of RAM used by BWA and GATK. The recommended configuration is with 16 GB or RAM. 
+   On SLURM cluster, it could be necessary to enable GATK computational options, setting the field "Overwrite Memory in MB (0 = don't overwrite)" to 7500 (MB).
+   This field corresponds to the GATK_MEM variable in the tool wrapper.
+
+   By default, GATK check if this variable is set. If not, the SLURM_MEM_PER_NODE variable is checked.
+   This variable, on SLURM, correspods to the --mem options (https://slurm.schedmd.com/sbatch.html>), i.e. the RAM associated to each job.
+   If this variable is not defined, a default value of 4096 MB is taken.
+
+   On Laniakea, the "--mem" options is not enabled by default, since it requires the RealMemory field enabled in the slurm.conf file, therefore it is currently needed to set the "Overwrite Memory in MB (0 = don't overwrite)" field to 7500.
+
