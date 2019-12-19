@@ -128,8 +128,44 @@ GDC Somatic Variant reference data
 GDC somatic variant Galaxy workflow
 ===================================
 
+------------------
+GDC wf preparation 
+------------------
+
+Before running the GDC_WF some preparation steps are required:
+
+#. On Galaxy homepage go to "Admin" then "manage tool" and select gatk.
+#. In this page select the tool dependecy "GATK_PATH"
+
+   .. figure:: _static/GATK_dependencies.png 
+      :scale: 50%
+      :align: center
+
+#. Copy the "Tool dependency installation directory"
+
+   .. figure:: _static/GATK_PATH.png
+      :scale: 50%
+      :align: center
+
+#. Open the env.sh located in the "Tool dependency installation directory" and change its content to: `GATK_PATH=/export/tool_deps/_conda; export GATK_PATH`
+#. Move the GenomeAnalysisTK.jar avaiable in GenomeAnalysisTK-3.8-0-ge9d806836.tar.bz2 downloadable from `GATK website <https://software.broadinstitute.org/gatk/download/archive>`_ package in `/export/tool_deps/_conda`
+#. Download the required vep-cache using vep-download-cache module of `Wrapper Variant Annotation <https://testtoolshed.g2.bx.psu.edu/view/elixir-it/vep86_vcf2maf/ca1e48c52db9>`_
+
 .. figure:: _static/galaxy_gdc_workflow.png
    :scale: 50%
    :align: center
 
    Fig.1-The Galaxy workflow that connects together all the tool of the GDC-DNA-seq pipeline in order to be automatically performed in a single step.
+   
+.. warning::
+
+   The GDC Somatic Variant Galaxy pipeline requires at least 7.5 GB of RAM to properly run, due to the large amount of RAM used by BWA and GATK. The recommended configuration is with 16 GB or RAM. 
+   On SLURM cluster, it could be necessary to enable GATK computational options, setting the field "Overwrite Memory in MB (0 = don't overwrite)" to 7500 (MB).
+   This field corresponds to the GATK_MEM variable in the tool wrapper.
+
+   By default, GATK check if this variable is set. If not, the SLURM_MEM_PER_NODE variable is checked.
+   This variable, on SLURM, correspods to the --mem options (https://slurm.schedmd.com/sbatch.html>), i.e. the RAM associated to each job.
+   If this variable is not defined, a default value of 4096 MB is taken.
+
+   On Laniakea, the "--mem" options is not enabled by default, since it requires the RealMemory field enabled in the slurm.conf file, therefore it is currently needed to set the "Overwrite Memory in MB (0 = don't overwrite)" field to 7500.
+
