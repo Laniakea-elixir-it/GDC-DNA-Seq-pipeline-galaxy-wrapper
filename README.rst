@@ -134,13 +134,10 @@ GDC wf preparation
 
 Before running the GDC_WF some preparation steps are required:
 
-#.On Galaxy homepage go to Admin |image_reference| then manage_tool and clic on `gatk tool <https://toolshed.g2.bx.psu.edu/view/avowinkel/gatk/b80ff7f43ad1>`_ Change the GATK_PATH dependency (file env.sh) from default to
+#.On Galaxy homepage go to Admin then *manage tool* and clic on `gatk tool <https://toolshed.g2.bx.psu.edu/view/avowinkel/gatk/b80ff7f43ad1>`_ click on GATK_PATH dependency finally  taking into account the *Tool dependency installation directory*  change the env.sh file from default to
    `GATK_PATH=/export/tool_deps/_conda; export GATK_PATH`
 #. Move the GenomeAnalysisTK.jar avaiable in GenomeAnalysisTK-3.8-0-ge9d806836.tar.bz2 downloadable from `GATK website <https://software.broadinstitute.org/gatk/download/archive>`_ package in `/export/tool_deps/_conda`
 #. Download the required vep-cache using vep-download-cache module of `Wrapper Variant Annotation <https://testtoolshed.g2.bx.psu.edu/view/elixir-it/vep86_vcf2maf/ca1e48c52db9>`_
-
-
-.. |image_reference| image:: _static/admin-camp.png
 
 .. figure:: _static/galaxy_gdc_workflow.png
    :scale: 50%
