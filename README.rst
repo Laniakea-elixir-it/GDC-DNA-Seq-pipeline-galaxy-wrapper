@@ -138,14 +138,14 @@ Before running the GDC_WF some preparation steps are required:
 #. In this page select the tool dependecy "GATK_PATH"
 
    .. figure:: _static/GATK_dependencies.png 
-   :scale: 50%
-   :align: center
+      :scale: 50%
+      :align: center
 
 #. Copy the "Tool dependency installation directory"
 
    .. figure:: _static/GATK_PATH.png
-   :scale: 50%
-   :align: center
+      :scale: 50%
+      :align: center
 
 #. Open the env.sh located in the "Tool dependency installation directory" and change its content to: `GATK_PATH=/export/tool_deps/_conda; export GATK_PATH`
 #. Move the GenomeAnalysisTK.jar avaiable in GenomeAnalysisTK-3.8-0-ge9d806836.tar.bz2 downloadable from `GATK website <https://software.broadinstitute.org/gatk/download/archive>`_ package in `/export/tool_deps/_conda`
